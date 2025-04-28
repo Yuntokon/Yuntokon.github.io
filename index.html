@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/png" href="favicon.png">
+<script>
+  var Module = {
+	preRun: [function() {
+		Module.FS_createPreloadedFile('/', 'anime-eyes-cascade.xml', 'https://raw.githubusercontent.com/recette-lemon/Haar-Cascade-Anime-Eye-Detector/master/anime-eyes-cascade.xml', true, false);
+		Module.FS_createPreloadedFile('/', 'lbpcascade_animeface.xml', 'https://raw.githubusercontent.com/nagadomi/lbpcascade_animeface/master/lbpcascade_animeface.xml', true, false);	  
+	}],
+	onRuntimeInitialized: async function() {
+		window.cv = (window.cv instanceof Promise) ? await window.cv : window.cv;
+		opencvReady = true;
+		if (currentTask && question)
+		{
+			currentTask.onQuestion();
+			requestAnimationFrame(currentTask.onDraw);
+		}
+	}
+  };
+</script>
+<script src="common.js"></script>
+
+<script src="schedule.js"></script>
+<script src="sketch.js"></script>
+
+<script src="angle.js"></script>
+<script src="angle2.js"></script>
+<script src="parallelogram.js"></script>
+<script src="boundingbox.js"></script>
+<script src="division.js"></script>
+<script src="symmetry.js"></script>
+
+<script src="midpoint1.js"></script>
+<script src="midpoint2.js"></script>
+<script src="vanishing.js"></script>
+<script src="vanishing2.js"></script>
+<script src="vanishingHorizon.js"></script>
+<script src="box.js"></script>
+<script src="rotConstruction.js"></script>
+<script src="rotConstruction2.js"></script>
+<script src="ellipse.js"></script>
+<script src="cylinder.js"></script>
+<script src="organic.js"></script>
+<script src="sphere.js"></script>
+<script src="sphereBox.js"></script>
+<script src="loomisRef.js"></script>
+<script src="loomis.js"></script>
+<script src="fov.js"></script>
+<script src="fovlines.js"></script>
+<script src="scale.js"></script>
+<script src="viewpointRotation.js"></script>
+<script src="viewpointCam.js"></script>
+<script src="curveRotation.js"></script>
+
+<script src="value.js"></script>
+<script src="valueSaturation.js"></script>
+
+<script src="memory.js"></script>
+<script src="colorPick.js"></script>
+<script src="filter.js"></script>
+
+<script src="croquis.js"></script>
+<script src="faces.js"></script>
+<script async src="https://docs.opencv.org/4.x/opencv.js"></script>
+
+</head>
+<body>
+	<div id="menu">
+		<svg viewBox="-12 -12 48 48" size="48" id="timer">
+		<circle id="timer-progress" class="paused" r="15" cx="12" cy="12"></circle></svg>
+		<div id="timer-label"></div>
+		<div id="counter"></div>
+		<nav id="nav">
+			<h1>- Settings -</h1>
+			<h3>Global</h3>
+			<div id="settingsGlobal" title="Space: Pause
+Enter: Complete task
+Right Arrow: Next task
+Left Arrow: Previous task
+
+D: Drawmode (When available)
+C: Color picker
+M: Flip canvas
+Shift: Guides
+Shift+Drag: Brushsize
+Ctrl+Z: Undo
+Ctrl+Drag: Erase
+Ctrl+Del: Clear
+Del: Sketch Layer"></div>
+			<h3>This task</h3>
+			<p id="settingsDescription"></p>
+			<div id="settings"></div>
+
+			<h1>- Menu -</h1>
+			<div id="tasks"></div>
+			<p id="disclaimer">This is just a collection of art tools made by a stranger on the internet. Remember to keep drawing stuff you actually care about.<br/>
+			</p>
+		</nav> 
+	</div>
+	
+	<canvas id="canvas1"></canvas>
+	<canvas id="canvas2"></canvas>
+	<canvas id="canvas3"></canvas>
+	<canvas id="canvas4"></canvas>
+	<div id="divider"></div>
+
+	<div id="delta"></div>
+	<div id="colorPicker">
+		<canvas id="canvasHue" width="200" height="1"></canvas>
+		<canvas id="canvasSatVal" width="200" height="150"></canvas>
+		<div id="color1"></div>
+		<div id="color2"></div>
+	</div>
+
+	<div id="drawCursor"></div>
+	<div id="horizontalGuide"></div>
+	<div id="verticalGuide"></div>
+	
+	<script>init();</script>
+</body>
+</html>
